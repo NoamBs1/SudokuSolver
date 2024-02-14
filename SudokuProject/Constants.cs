@@ -9,7 +9,15 @@ namespace SudokuProject
 {
     internal class Constants
     {
-        public static readonly char[] Values = Enumerable.Range('1', 9).Select(i => (char) i).ToArray();
+        public static char[] Values { get; set; }
+        /// <summary>
+        /// defines the size we work with
+        /// </summary>
+        /// <param name="size">the required size</param>
+        public Constants(int size)
+        {
+            Values = Enumerable.Range('1', size).Select(i => (char)i).ToArray();
+        }
 
     }
 }
