@@ -67,5 +67,18 @@ namespace SudokuProject
             }
             return board;
         }
+        /// <summary>
+        /// converts the board to a string
+        /// </summary>
+        /// <param name="board">the board you want to convert</param>
+        /// <returns>the stringed board</returns>
+        public static string ConvertToString(IBoard board)
+        {
+            StringBuilder sb = new StringBuilder();
+            for(int i=0; i < board.Size; i++)
+                for(int j=0; j < board.Size;j++)
+                    sb.Append(board.Matrix[i,j].Clue);
+            return sb.ToString();
+        }
     }
 }
