@@ -9,6 +9,9 @@ namespace SudokuProject
     internal interface IBoard
     {
         int Size { get; set; }
-        void AddToBoard(int row, int col, char val);
+        Cell[,] Matrix { get; set; }
+        bool AddToBoard(int row, int col, char val);
+        void PrintBoard();
+        object Clone();
     }
 }

@@ -10,8 +10,8 @@ namespace SudokuProject
     internal class FileInputHandler : IInputHandler
     {
         private readonly string _fileName;
-        public FileInputHandler(string fileName) 
-        { 
+        public FileInputHandler(string fileName)
+        {
             _fileName = fileName;
         }
 

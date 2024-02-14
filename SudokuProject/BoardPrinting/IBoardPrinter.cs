@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace SudokuProject
 {
+    /// <summary>
+    /// interface of printing a board
+    /// </summary>
     internal interface IBoardPrinter
     {
-        void Print(Board board);
+        void Print(IBoard board);
     }
 }
