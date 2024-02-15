@@ -35,7 +35,7 @@ namespace SudokuProject
             {
                 for (int j = 0; j < size; j++)
                 {
-                    Matrix[i, j] = new Cell('0', i, j);
+                    Matrix[i, j] = new Cell('0');
                 }
             }
         }
@@ -80,8 +80,6 @@ namespace SudokuProject
                     Matrix[row, i].RemoveCandidate(Matrix[row, column].Clue);
                     if (Matrix[row, i].Candidates.Count == 0)
                         return false;
-                    if (Matrix[row, i].Candidates.Count == 1)
-                        this.AddToBoard(row, i, Matrix[row, i].Candidates.Last());
                 }
             }
             return true;
@@ -101,8 +99,6 @@ namespace SudokuProject
                     Matrix[i, column].RemoveCandidate(Matrix[row, column].Clue);
                     if (Matrix[i, column].Candidates.Count == 0)
                         return false;
-                    if (Matrix[i, column].Candidates.Count == 1)
-                        this.AddToBoard(i, column, Matrix[i, column].Candidates.Last());
                 }
             }
             return true;
@@ -126,8 +122,6 @@ namespace SudokuProject
                         Matrix[i, j].RemoveCandidate(Matrix[row, column].Clue);
                         if (Matrix[i, j].Candidates.Count == 0)
                             return false;
-                        if (Matrix[i, j].Candidates.Count == 1)
-                            this.AddToBoard(i, j, Matrix[i, j].Candidates.Last());
                     }
             return true;
         }

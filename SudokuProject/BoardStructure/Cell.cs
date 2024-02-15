@@ -13,21 +13,17 @@ namespace SudokuProject
     {
         public char Clue { get; set; }
 
-        public int row { get; set; }
-        public int col { get; set; }
         public IList<char> Candidates { get; set; }
 
         /// <summary>
         /// Initialized a Cell in the board
         /// </summary>
         /// <param name="clue">the char that assigned to the cell</param>
-        public Cell(char clue, int row, int col)
+        public Cell(char clue)
         {
             Clue = clue;
             if (clue == '0')
                 Candidates = new List<char>(Constants.Values);
-            this.row = row;
-            this.col = col;
         }
         /// <summary>
         /// removes a candidate from the set of candidates that the cell has

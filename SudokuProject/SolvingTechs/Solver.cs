@@ -14,24 +14,19 @@ namespace SudokuProject
     /// </summary>
     internal partial class Solver
     {
-        public IBoard Board { get; set; }
-
-        /// <summary>
-        /// Initialized a solver with the required board
-        /// </summary>
-        /// <param name="board">the board you want to be solved</param>
-        public Solver(IBoard board)
-        {
-            Board = board;
-        }
         /// <summary>
         /// solving the board
         /// </summary>
         /// <param name="board">the board you want to be solved</param>
         /// <returns>the solved board</returns>
-
         public IBoard Solve(IBoard board)
         {
+            bool flag = true;
+            while(flag)
+            {
+                flag = NakedSingle(board);
+            }
+
             (int row, int col) minCell = FindCellMinCandidates(board);
             if (minCell == (-1, -1))
             {

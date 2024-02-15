@@ -29,7 +29,7 @@ namespace SudokuProject
         public void CheckLength()
         {
             if (Math.Sqrt(Input.Length) != Constants.Values.Count())
-                throw new Exception("the input is not valid");
+                throw new Exception("the input is not valid - length doesn't match");
         }
         /// <summary>
         /// checks if a string contains only valid chars due to the length of the input
@@ -40,7 +40,7 @@ namespace SudokuProject
             for (int i = 0; i < Input.Length; i++)
             {
                 if (!(Constants.Values.Contains(Input[i]) || Input[i] == '0'))
-                    throw new Exception("the input is not valid");
+                    throw new Exception("the input is not valid - chars don't match");
             }
         }
         /// <summary>
