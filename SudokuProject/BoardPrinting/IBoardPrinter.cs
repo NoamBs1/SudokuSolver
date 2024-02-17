@@ -9,7 +9,7 @@ namespace SudokuProject
     /// <summary>
     /// interface of printing a board
     /// </summary>
-    internal interface IBoardPrinter
+    public interface IBoardPrinter
     {
         void Print(IBoard board);
     }

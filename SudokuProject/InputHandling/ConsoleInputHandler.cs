@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SudokuProject
 {
-    internal class ConsoleInputHandler : IInputHandler
+    public class ConsoleInputHandler : IInputHandler
     {
         public string GetInput()
         {

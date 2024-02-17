@@ -9,7 +9,7 @@ namespace SudokuProject
     /// <summary>
     /// this class represent a cell in sudoku board
     /// </summary>
-    internal class Cell : ICloneable
+    public class Cell : ICloneable
     {
         public char Clue { get; set; }
 
@@ -25,6 +25,7 @@ namespace SudokuProject
             if (clue == '0')
                 Candidates = new List<char>(Constants.Values);
         }
+
         /// <summary>
         /// removes a candidate from the set of candidates that the cell has
         /// </summary>
@@ -33,6 +34,7 @@ namespace SudokuProject
         {
             this.Candidates.Remove(clue);
         }
+
         /// <summary>
         /// clones the cell
         /// </summary>

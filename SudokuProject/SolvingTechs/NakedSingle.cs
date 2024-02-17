@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SudokuProject
 {
-    internal partial class Solver
+    public partial class Solver
     {
         public bool NakedSingle(IBoard b)
         {

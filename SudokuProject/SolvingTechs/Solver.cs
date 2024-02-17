@@ -12,14 +12,15 @@ namespace SudokuProject
     /// <summary>
     /// the class that solving the board
     /// </summary>
-    internal partial class Solver
+    public partial class Solver
     {
         /// <summary>
-        /// solving the board
+        /// solves the board, empty cells is given
         /// </summary>
         /// <param name="board">the board you want to be solved</param>
+        /// <param name="emptyCells">the list of indexes of the empty cells in the board</param>
         /// <returns>the solved board</returns>
-        public IBoard Solve(IBoard board)
+        public IBoard Solve(IBoard board, List<(int, int)> emptyCells)
         {
             bool flag = true;
             while(flag)
@@ -27,45 +28,66 @@ namespace SudokuProject
                 flag = NakedSingle(board);
             }
 
-            (int row, int col) minCell = FindCellMinCandidates(board);
+            (int row, int col) minCell = FindCellMinCandidatesV2(board, emptyCells);
             if (minCell == (-1, -1))
             {
                 return board;
             }
-            foreach (char candidate in board.Matrix[minCell.row, minCell.col].Candidates)
+            foreach (char candidate in board.Matrix[minCell.row, minCell.col].Candidates.ToList())
             {
                 IBoard clonedBoard = (IBoard)board.Clone();
                 if (clonedBoard.AddToBoard(minCell.row, minCell.col, candidate))
                 {
-                    IBoard tempBoard = Solve(clonedBoard);
+                    emptyCells.Remove(minCell);
+                    IBoard tempBoard = Solve(clonedBoard, emptyCells);
                     if (tempBoard != null && IsBoardValidAndComplete(tempBoard))
                         return tempBoard;
+                    emptyCells.Add(minCell);
                 }
             }
             return null;
         }
 
-
         /// <summary>
-        /// finds the cell with minimal candidates
+        /// solves the board
         /// </summary>
         /// <param name="board">the board you want to be solved</param>
-        /// <returns>the indexes of the cell with the min candidates</returns>
-        public (int, int) FindCellMinCandidates(IBoard board)
+        /// <returns>the solved board</returns>
+        public IBoard Solve(IBoard board)
+        {
+            List<(int, int)> emptyCells = GetEmptyCells(board);
+            return Solve(board, emptyCells);
+        }
+        /// <summary>
+        /// creates a list of indexes of the cells that empty in the board
+        /// </summary>
+        /// <param name="board">the board you want to be solved</param>
+        /// <returns>a list of indexes of the cells that empty in the board</returns>
+        public List<(int,int)> GetEmptyCells(IBoard board)
+        {
+            List<(int,int)> emptyCells = new List<(int,int)> ();
+            for(int i=0;i<board.Size;i++)
+                for(int  j=0;j<board.Size;j++)
+                    if (board.Matrix[i,j].Clue == '0')
+                        emptyCells.Add((i,j));
+            return emptyCells;
+        }
+        /// <summary>
+        /// finds the cell with the least amount of candidates
+        /// </summary>
+        /// <param name="board">the board, you want to check</param>
+        /// <param name="emptyCells">the list of all empty cells in the given board</param>
+        /// <returns>the indexes of the cell with the least amount of candidates</returns>
+        public (int,int) FindCellMinCandidatesV2(IBoard board, List<(int, int)> emptyCells)
         {
             (int, int) minCell = (-1, -1);
             int minCandidates = board.Size + 1;
-            for (int i = 0; i < board.Size; i++)
+            foreach((int row, int col) in emptyCells)
             {
-                for (int j = 0; j < board.Size; j++)
+                if (board.Matrix[row,col].Candidates.Count < minCandidates)
                 {
-                    if (board.Matrix[i, j].Clue == '0' && board.Matrix[i, j].Candidates.Count < minCandidates)
-                    {
-                        minCell = (i, j);
-                        minCandidates = board.Matrix[i, j].Candidates.Count;
-                        if (minCandidates == 1)
-                            return minCell;
-                    }
+                    minCell = (row, col);
+                    minCandidates = board.Matrix[row,col].Candidates.Count;
                 }
             }
             return minCell;

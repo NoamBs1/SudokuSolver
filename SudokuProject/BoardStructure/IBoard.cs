@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SudokuProject
 {
-    internal interface IBoard
+    public interface IBoard
     {
         int Size { get; set; }
         Cell[,] Matrix { get; set; }

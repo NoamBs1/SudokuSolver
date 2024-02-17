@@ -9,7 +9,7 @@ namespace SudokuProject
     /// <summary>
     /// this class represent a sudoku board
     /// </summary>
-    internal class Board : IBoard, ICloneable
+    public class Board : IBoard, ICloneable
     {
         public int Size { get; set; }
         public Cell[,] Matrix { get; set; }
@@ -65,6 +65,8 @@ namespace SudokuProject
             }
             return true;
         }
+
+
         /// <summary>
         /// this function updates the candidadates of the cells in the row
         /// </summary>

@@ -10,7 +10,7 @@ namespace SudokuProject
     /// <summary>
     /// writes the board to a file
     /// </summary>
-    internal class BoardPrinterFile : IBoardPrinter
+    public class BoardPrinterFile : IBoardPrinter
     {
         public string FilePath;
         /// <summary>

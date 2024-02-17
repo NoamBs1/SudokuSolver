@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SudokuProject
 {
-    internal class Program
+    public class Program
     {
         /// <summary>
         /// the main app of the sudoku
@@ -26,11 +26,16 @@ namespace SudokuProject
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("choose size:");
                 Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("note: for quit the app, choose 0");
                 Console.WriteLine("note: for console the max size of a board can be 9");
                 Console.ResetColor();
                 try
                 {
                     int size = int.Parse(Console.ReadLine());
+                    if (size == 0)
+                    {
+                        return;
+                    }
                     if (Math.Sqrt(size) % 1 != 0)
                     {
                         Console.WriteLine("that's not a valid size for a sudoku board");
@@ -77,7 +82,6 @@ namespace SudokuProject
                             else
                             {
                                 Console.WriteLine("not solvable");
-                                Console.WriteLine(stopWatch.ElapsedMilliseconds / 1000.0 + "s");
                             }
                         }
                         catch (Exception e)
@@ -90,8 +94,8 @@ namespace SudokuProject
                         Console.WriteLine("enter the file path:");
                         Console.ResetColor();
                         string filePath = Console.ReadLine();
-                        try
-                        {
+                        //try
+                        //{
                             Parser parserFile = new Parser(new FileInputHandler(filePath));
                             IBoard parsedFileBoard = parserFile.Parse(board);
                             parsedFileBoard.PrintBoard();
@@ -110,13 +114,12 @@ namespace SudokuProject
                             else
                             {
                                 Console.WriteLine("not solvable");
-                                Console.WriteLine(stopWatch.ElapsedMilliseconds / 1000.0 + "s");
                             }
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                        }
+                        //}
+                        //catch (Exception e)
+                        //{
+                        //    Console.WriteLine(e.Message);
+                        //}
                         break;
                     default:
                         Console.WriteLine("\ntry again...");

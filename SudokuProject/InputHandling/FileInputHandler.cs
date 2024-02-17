@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SudokuProject
 {
-    internal class FileInputHandler : IInputHandler
+    public class FileInputHandler : IInputHandler
     {
         private readonly string _fileName;
         public FileInputHandler(string fileName)
@@ -17,7 +17,14 @@ namespace SudokuProject
 
         public string GetInput()
         {
-            return File.ReadAllText(_fileName);
+            try
+            {
+                return File.ReadAllText(_fileName);
+            }
+            catch
+            {
+                throw new Exception("can not locate or read from this file");
+            }
         }
     }
 }

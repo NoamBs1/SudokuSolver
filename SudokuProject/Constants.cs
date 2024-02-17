@@ -7,7 +7,7 @@ using System.Windows.Markup;
 
 namespace SudokuProject
 {
-    internal class Constants
+    public class Constants
     {
         public static char[] Values { get; set; }
         /// <summary>

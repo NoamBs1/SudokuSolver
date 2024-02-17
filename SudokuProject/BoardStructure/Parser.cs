@@ -9,10 +9,19 @@ namespace SudokuProject
     /// <summary>
     /// this class manage the input getting, and transform it into a board
     /// </summary>
-    internal class Parser
+    public class Parser
     {
         private readonly IInputHandler _InputHandler;
-        public string Input { get; private set; }
+        public string Input { get; set; }
+
+        /// <summary>
+        /// Initialized the parser with the input
+        /// </summary>
+        /// <param name="Input">the string of the input</param>
+        public Parser(string Input)
+        { 
+            this.Input = Input;
+        }
         /// <summary>
         /// Initialized the parser with the way you want to get your input
         /// </summary>
@@ -21,6 +30,10 @@ namespace SudokuProject
         {
             _InputHandler = inputHandler;
             Input = inputHandler.GetInput();
+            if (Input == null)
+            {
+                throw new Exception("can not get that");
+            }
         }
         /// <summary>
         /// checks if the length of the input is valid for a board

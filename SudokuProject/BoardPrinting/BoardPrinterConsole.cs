@@ -9,7 +9,7 @@ namespace SudokuProject
     /// <summary>
     /// this class prints the board to the console
     /// </summary>
-    internal class BoardPrinterConsole : IBoardPrinter
+    public class BoardPrinterConsole : IBoardPrinter
     {
         /// <summary>
         /// prints a delimiter line
