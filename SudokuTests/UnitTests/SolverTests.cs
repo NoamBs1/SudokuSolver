@@ -10,7 +10,6 @@ namespace SudokuProject.UnitTests
         [TestMethod]
         public void IsBoardValidAndComplete_ValidBoard_ReturnsTrue()
         {
-            Solver solver = new Solver();
             IBoardPrinter printer = new BoardPrinterConsole();
             Constants con = new Constants(4);
             Board b = new Board(4, printer);
@@ -38,7 +37,7 @@ namespace SudokuProject.UnitTests
         }
 
         [TestMethod]
-        public void FindCellMinCandidates_ValidBoard_ReturnsIndexesOfCellMinCandidates()
+        public void FindCellMinCandidatesV2_ValidBoard_ReturnsIndexesOfCellMinCandidates()
         {
             Solver solver = new Solver();
             IBoardPrinter printer = new BoardPrinterConsole();
@@ -46,7 +45,7 @@ namespace SudokuProject.UnitTests
             Board b = new Board(4, printer);
             b.Matrix[1, 1].Candidates = new List<char> { '1' };
 
-            var minCell = solver.FindCellMinCandidates(b);
+            var minCell = solver.FindCellMinCandidatesV2(b, solver.GetEmptyCells(b));
 
             Assert.AreEqual(minCell, (1, 1));
         }
@@ -64,6 +63,21 @@ namespace SudokuProject.UnitTests
             IBoard solvedBoard = solver.Solve(sb);
 
             Assert.AreEqual(Parser.ConvertToString(solvedBoard), "1234341221434321");
+        }
+
+        [TestMethod]
+        public void Solve_SolvableBoard2_ReturnsValidAndCompleteBoard()
+        {
+            Solver solver = new Solver();
+            IBoardPrinter printer = new BoardPrinterConsole();
+            Constants con = new Constants(9);
+            Board b = new Board(9, printer);
+            Parser p = new Parser("800000070006010053040600000000080400003000700020005038000000800004050061900002000");
+            IBoard sb = p.Parse(b);
+
+            IBoard solvedBoard = solver.Solve(sb);
+
+            Assert.AreEqual(Parser.ConvertToString(solvedBoard), "831529674796814253542637189159783426483296715627145938365471892274958361918362547");
         }
 
         [TestMethod]

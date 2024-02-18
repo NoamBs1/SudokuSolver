@@ -94,8 +94,8 @@ namespace SudokuProject
                         Console.WriteLine("enter the file path:");
                         Console.ResetColor();
                         string filePath = Console.ReadLine();
-                        //try
-                        //{
+                        try
+                        {
                             Parser parserFile = new Parser(new FileInputHandler(filePath));
                             IBoard parsedFileBoard = parserFile.Parse(board);
                             parsedFileBoard.PrintBoard();
@@ -115,11 +115,11 @@ namespace SudokuProject
                             {
                                 Console.WriteLine("not solvable");
                             }
-                        //}
-                        //catch (Exception e)
-                        //{
-                        //    Console.WriteLine(e.Message);
-                        //}
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
                         break;
                     default:
                         Console.WriteLine("\ntry again...");

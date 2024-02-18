@@ -57,9 +57,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AppTests\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\SudokuProject\SudokuProject.csproj">
       <Project>{49de4407-96bf-43ee-ab12-3c61ceb957db}</Project>
